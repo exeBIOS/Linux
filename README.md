@@ -1,5 +1,5 @@
 # Linux-FTP-Server: Installing VSFTP
-Here is the procedure i follow to configure a linux ftp server on Debian-11
+Here is the procedure i followed to configure a linux ftp server on Debian-11
 # FTP server configuration
 
 ## Introduction
