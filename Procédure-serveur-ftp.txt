@@ -1,0 +1,55 @@
+##FTP server configuration
+
+###Introduction
+VSFTP allows you to secure an FTP server using SSL or TLS protocols.
+
+The objective of this part is to install a Debian server on which we will add an FTP service.
+
+###Installation and configuration
+
+###Installation
+```sudo apt-get update && sudo apt-get -y install vsftpd openssl```
+
+###Key generation
+```ll -d /etc/ssl/private```
+
+Check that the rights on this directory are 700. Otherwise, run the appropriate command for this.
+
+And if the directory does not exist, create it and assign it rights 700.
+
+We now create the key:
+
+```openssl req -x509 -nodes -days 365 -newkey rsa:3072 -keyout /etc/ssl/private/vsftpd_key.pem -out /etc/ssl/private/vsftpd.pem
+Generating a 1024 bit RSA private key
+....++++++
+.....++++++
+writing new private key to '/etc/ssl/private/vsftpd_key.pem'
+-----```
+
+The following questions must now be answered:
+
+```You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+-----```
+```Country Name (2 letter code) [AU]:FR
+State or Province Name (full name) [Some-State]:
+Locality Name (eg, city) []:<Entrer la ville (Pau)>
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:<ORGANISME DE FORMATION>
+Organizational Unit Name (eg, section) []:<NOM DE LA FORMATION>
+Common Name (e.g. server FQDN or YOUR name) []:example.com
+Email Address []:<admin@example.com>```
+
+
+
+
+
+
+
+
+
+
+
