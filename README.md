@@ -304,9 +304,8 @@ guest_username=ftp
 ## Connection with Filezilla
 The next steps will be done on your client
 ## Creating a bookmark
-Open session manager:
-<img width="47" alt="filezilla-icone-gestionnaire" src="https://github.com/exeBIOS/linux-ftp-server/assets/133054713/d589aba7-abf2-4b7e-b1d5-ce3a52076f68">
-The following window appears:
+Open session manager
+The following window appears
 
 
 
