@@ -1,6 +1,6 @@
-# Linux-FTP-Server: Installing VSFTP
+# Linux-FTP-Server: Installing VSFTP「🐧」
 Here is the procedure i followed to configure a linux ftp server on Debian-11
-# FTP server configuration
+# FTP server configuration「⚙️」
 
 ## Introduction
 
@@ -15,7 +15,7 @@ The objective of this part is to [install a Debian server](https://cdimage.debia
 sudo apt-get update && sudo apt-get -y install vsftpd openssl
 ```
 
-### Key generation
+### Key generation「🔑」
 ```
 ll -d /etc/ssl/private
 ```
@@ -104,7 +104,7 @@ require_ssl_reuse=NO
 ```
 ssl_ciphers=HIGH
 ```
-## Forcing TLS connections
+## Forcing TLS connections「🔗」
 Using (above) force_local_logins_ssl=YES and force_local_data_ssl=YES, then only TLS connections are secure.
 
 This may block users with an old FTP client (which does not support TLS), but provides a better level of security.
