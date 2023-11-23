@@ -6,7 +6,7 @@ Here is the procedure i followed to configure a linux ftp server on Debian-11
 
 VSFTP allows you to secure an FTP server using SSL or TLS protocols.
 
-The objective of this part is to install a Debian server on which we will add an FTP service.
+The objective of this part is to [install a Debian server](https://cdimage.debian.org/debian-cd/current/amd64/iso-cd/) on which we will add an FTP service.
 
 ## Installation and configuration
 
@@ -51,9 +51,21 @@ Organizational Unit Name (eg, section) []:<NAME OF TRAINING>
 Common Name (e.g. server FQDN or YOUR name) []:example.com
 Email Address []:<admin@example.com>
 ```
+> [!note]
+> ### Text editors
+> Some information on text editors.
+> The file to be edited is dense, here are some tips for modifying it and especially searching for information inside.
+> 1) You can edit it with **nano** and modify the elements indicated below. To navigate **nano**, use the following shortcuts:
+>     - **ctrl-W**: searches for a character string (**alt-W** repeats the search).
+>     - **ctrl-G**: displays help.
+>     - **ctrl-C** or **F11**: displays the current cursor position (useful for knowing the line number).
+>     - **ctrl-_** or **Alt-G**: go to line no…
+>     - **ctrl-K**: **cut**: cuts the current line.
+>     - **ctrl-U**: **Uncut**: pastes the previously cut line.
+> 2) Another editor is ne (Nice Editor) and offers more “standard” shortcuts (**ctrl-C**, **ctrl-V**) and access to a menu bar using the **Esc** key.
+> It is installable via **apt-get**.
 ## Configuring VSFTP
 The ```/etc/vsftpd.conf``` file allows you to modify various elements.
-
 Change the following options (*check with the search functions if they are already present using* ```ctrl + w```):
 
 - Activates SSL
@@ -141,9 +153,10 @@ If no configuration errors are present, the service should start without errors.
 sudo systemctl status vsftpd
 ```
 ## Testing with the Filezilla client
-Download the FileZilla client and verify that the connection works using one of the users declared on the system.
-**Using a declared user can be problematic from a security point of view: this means in particular users who are given usernames/passwords to connect will also be able to connect via SSH.
-The next step suggests managing FTP users separately from system users.**
+Download the [FileZilla](https://filezilla-project.org/) client and verify that the connection works using one of the users declared on the system.
+>[!note]
+>Using a declared user can be problematic from a security point of view: this means in particular users who are given usernames/passwords to connect will also be able to connect via SSH.
+>The next step suggests managing **FTP** users separately from system users.
 ## User Management
 ## Creating a dedicated user
 We will create a user and position their home directory in ```/var/ftproot```.
@@ -201,15 +214,19 @@ auth required pam_userdb.so db=/etc/vsftpd/login
 account required pam_userdb.so db=/etc/vsftpd/login
 session  required  pam_loginuid.so
 ```
-It may be necessary to indicate the full path to pam_userdb.so (in the file ```/etc/pam.d/vsftpd```).
-To do this, retrieve its full path using the following command:
-```
-find /lib -name pam_userdb.so
-```
-Command output: ```/lib/x86_64-linux-gnu/security/pam_userdb.so```
-**Check that you are pointing to ```/etc/vsftpd/login``` (***the .db extension is added automatically by PAM, you should not put it otherwise file not found error***). In fact, the best is to create this file (***see next paragraph***)**
+>[!note]
+>It may be necessary to indicate the full path to pam_userdb.so (in the file ```/etc/pam.d/vsftpd```).
+>To do this, retrieve its full path using the following command:
+>```
+>find /lib -name pam_userdb.so
+>```
+>Command output: ```/lib/x86_64-linux-gnu/security/pam_userdb.so```
+
+> [!important]
+> Check that you are pointing to ```/etc/vsftpd/login``` (***the .db extension is added automatically by PAM, you should not put it otherwise file not found error***). In fact, the best is to create this file (***see next paragraph***)
 # PAM User Database
-**In this section, we will enable the previously created user to be usable only in VSFTP.**
+>[!note]
+>In this section, we will enable the previously created user to be usable only in VSFTP.
 We will create a local password database:
 ```
 sudo mkdir /etc/vsftpd/
@@ -297,6 +314,7 @@ allow_writeable_chroot=YES
 guest_enable=YES
 guest_username=ftp
 ```
+> [!note]
 > The folder ```/path/to/folder/user1``` must be created and existing.
 > Position the rights for the **ftp** user on this folder (*according to needs and rights*)
 
@@ -304,8 +322,141 @@ guest_username=ftp
 ## Connection with Filezilla
 The next steps will be done on your client
 ## Creating a bookmark
-Open session manager
-The following window appears
+- Open session manager
+Create a session with the “New site” button and define the following fields:
+
+1) Host: the IP of the host
+2) Protocol: FTP
+3) Encryption: explicit FTP connection over TLS
+4) Authentication type: ask for password
+5) Identifier: external
+Then click on “Connection”.
+- **Review the information carefully and click OK.**
+The connection should be made and display the contents of the directory.
+## Tests
+Try to create a directory from Filezilla. 
+What is going on ? How can I enable the creation of a directory?
+
+> [!warning]
+> It is forbidden to use chmod 777...
+> There are other possibilities for this, including the use of the ftp group.
+> We must therefore find a way to make the /srv/ftp/allusers directory writable by FTP server users with these constraints.
+
+## Troubleshooting
+## Log
+The log file is ```/var/log/vsftpd.log```
+The ```journalctl``` command also displays relevant information.
+## Log levels
+The ```vsftpd.conf``` man page is useful in determining which parameters to add.
+To add more information to the logs, it may be interesting to set the following parameters in the ```vsftpd.conf``` file:
+- **log_ftp_protocol**: possible values **YES** or ***NO***
+- **debug_ssl**: possible values **​YES** or ***NO***
+Values ​​in italics are the **default** values.
+## Debugging
+Disabling SSL temporarily to see errors can help a lot:
+```
+ssl_enable=NO
+```
+Restart the service and test
+### In case of error
+In case of **error GnuTLS error -15: An unexpected TLS packet was received**.
+Check that the directory designated by the **local_root** variable exists.
+Otherwise:
+```
+sudo mkdir -p /srv/ftp/allusers
+```
+This error can also be due to VSFTP refusing to leave the user directory with write rights. In this case, add this line to authorize it:
+```
+allow_writeable_chroot=YES
+```
+#### **GnuTLS error**
+In case of error GnuTLS error -15: An unexpected TLS packet was received.
+See [vsftpd - GnuTLS error -15: An unexpected TLS packet was received](https://askubuntu.com/questions/637810/vsftpd-gnutls-error-15-an-unexpected-tls-packet-was-received)
+### Possible errors and possible corrections
+#### Presence of local_root
+Check that the directory designated by the local_root variable exists.
+Otherwise:
+```
+sudo mkdir -p /srv/ftp/allusers
+```
+If the error persists, add:
+```
+allow_writeable_chroot=YES
+```
+#### 500 OOPS: bad bool value in config file for: write_enable
+This could be caused by incorrect characters or spaces.
+Correction:
+```
+sed 's,\r,,;s, *$,,' /etc/vsftpd/vsftpd_user_conf/judith | sudo tee /etc/vsftpd/vsftpd_user_conf/judith_new
+```
+> [source](https://serverfault.com/questions/442500/500-oops-bad-bool-value-in-config-file-for-anonymous-enable)
+
+#### Possible bug with PAM
+Sometimes you may find yourself with a folder that is impossible to display while the others are.
+By disabling SSL, one may possibly (but not always) see the following error:
+```
+500 OOPS: priv_sock_get_cmd
+```
+If the ACLs are correct, then add the following line to the end of ```/etc/vsftpd.conf```:
+```
+seccomp_sandbox=NO
+```
+And restart the VSFTP server
+#### Blocking ECONNREFUSED
+See first [How to handle FTP over SSL with restrictive firewall rules](https://unix.stackexchange.com/questions/150425/proper-way-to-handle-ftp-over-ssl-with-restrictive-firewall-rules)
+Here, it is probably an iptables rule that is blocking.
+Method to follow
+1) Make a backup: iptables-save > iptables.save.dump
+2) List the rules:
+```
+$ sudo iptables -L -t filter --line-numbers
+Chain INPUT (policy ACCEPT)
+num  target     prot opt source               destination         
+1    fail2ban-ssh  tcp  --  anywhere             anywhere             multiport dports ssh
+2    ACCEPT     all  --  anywhere             anywhere            
+3    ACCEPT     icmp --  anywhere             anywhere             state NEW icmp echo-request
+4    ACCEPT     tcp  --  anywhere             anywhere             tcp dpt:ssh state NEW
+5    ACCEPT     tcp  --  anywhere             anywhere             tcp dpt:http state NEW
+6    ACCEPT     tcp  --  anywhere             anywhere             tcp dpt:https state NEW
+7    ACCEPT     all  --  anywhere             anywhere             state RELATED,ESTABLISHED
+8    LOG        all  --  anywhere             anywhere             limit: avg 5/min burst 5 LOG level debug prefix "iptables_INPUT_denied: "
+
+Chain FORWARD (policy ACCEPT)
+num  target     prot opt source               destination         
+
+Chain OUTPUT (policy ACCEPT)
+num  target     prot opt source               destination         
+
+Chain fail2ban-ssh (1 references)
+num  target     prot opt source               destination         
+1    RETURN     all  --  anywhere             anywhere
+```
+3) Delete the rules one by one: sudo iptables -D INPUT 9 -t filter (9 is the number given by the previous command)
+4) Test if deletion has an effect
+
+#### Passage of the firewall and passive mode
+It seems that the only way to get past the firewall is to use passive mode.
+```
+# Passive mode
+pasv_enable=YES
+pasv_min_port=3000
+pasv_max_port=3099
+listen_port=21
+```
+The port range (here 3000 to 3099) must be open in the firewall.
+## Unable to create a folder
+## Allow local edits for *login.db* users
+In vsftpd.conf, add:
+```
+write_enable=YES
+local_umask=022
+
+# Uncomment this to indicate that vsftpd use a utf8 filesystem.
+utf8_filesystem=YES
+allow_writeable_chroot=YES
+```
+Restart the service and test
+
 
 
 
