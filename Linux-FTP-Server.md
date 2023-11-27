@@ -359,6 +359,38 @@ allow_writeable_chroot=YES
 ```
 #### 500 OOPS: bad bool value in config file for: write_enable
 This could be caused by incorrect characters or spaces.
+> [!note]
+> Replace "Judith" with the name of your user, then go into ```/etc/vsftpd/vsftpd_user_conf/<user>``` and verify that you
+> have this righten in the document:
+```
+## l'utilisateur est enfermé dans un dossier déterminé
+local_root=/srv/ftp/allusers
+
+## on ne souhaite pas de lecture seule (Lecture seulement)
+anon_world_readable_only=NO
+
+## droit d'écriture(upload)
+write_enable=yes
+
+anon_upload_enable=YES
+
+## créer des dossiers
+anon_mkdir_write_enable=YES
+
+## droit de renommer, supprimer...
+anon_other_write_enable=YES
+
+## pour gérer le chmod de l'utilisateur
+## activer l'option
+virtual_use_local_privs=YES
+## définir l'option local_umask
+local_umask=022
+anon_umask=022
+allow_writeable_chroot=YES
+
+guest_enable=YES
+guest_username=ftp
+```
 Correction:
 ```
 sed 's,\r,,;s, *$,,' /etc/vsftpd/vsftpd_user_conf/judith | sudo tee /etc/vsftpd/vsftpd_user_conf/judith_new
