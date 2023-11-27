@@ -343,6 +343,27 @@ What is going on ? How can I enable the creation of a directory?
 > We must therefore find a way to make the /srv/ftp/allusers directory writable by FTP server users with these constraints.
 
 ## Troubleshooting
+#### **GnuTLS error**
+In case of error GnuTLS error -15: An unexpected TLS packet was received.
+See [vsftpd - GnuTLS error -15: An unexpected TLS packet was received](https://askubuntu.com/questions/637810/vsftpd-gnutls-error-15-an-unexpected-tls-packet-was-received)
+### Possible errors and possible corrections
+#### Presence of local_root
+Check that the directory designated by the local_root variable exists.
+Otherwise:
+```
+sudo mkdir -p /srv/ftp/allusers
+```
+If the error persists, add:
+```
+allow_writeable_chroot=YES
+```
+#### 500 OOPS: bad bool value in config file for: write_enable
+This could be caused by incorrect characters or spaces.
+Correction:
+```
+sed 's,\r,,;s, *$,,' /etc/vsftpd/vsftpd_user_conf/judith | sudo tee /etc/vsftpd/vsftpd_user_conf/judith_new
+```
+> [source](https://serverfault.com/questions/442500/500-oops-bad-bool-value-in-config-file-for-anonymous-enable)
 ## Log
 The log file is ```/var/log/vsftpd.log```
 The ```journalctl``` command also displays relevant information.
@@ -369,28 +390,6 @@ This error can also be due to VSFTP refusing to leave the user directory with wr
 ```
 allow_writeable_chroot=YES
 ```
-#### **GnuTLS error**
-In case of error GnuTLS error -15: An unexpected TLS packet was received.
-See [vsftpd - GnuTLS error -15: An unexpected TLS packet was received](https://askubuntu.com/questions/637810/vsftpd-gnutls-error-15-an-unexpected-tls-packet-was-received)
-### Possible errors and possible corrections
-#### Presence of local_root
-Check that the directory designated by the local_root variable exists.
-Otherwise:
-```
-sudo mkdir -p /srv/ftp/allusers
-```
-If the error persists, add:
-```
-allow_writeable_chroot=YES
-```
-#### 500 OOPS: bad bool value in config file for: write_enable
-This could be caused by incorrect characters or spaces.
-Correction:
-```
-sed 's,\r,,;s, *$,,' /etc/vsftpd/vsftpd_user_conf/judith | sudo tee /etc/vsftpd/vsftpd_user_conf/judith_new
-```
-> [source](https://serverfault.com/questions/442500/500-oops-bad-bool-value-in-config-file-for-anonymous-enable)
-
 #### Possible bug with PAM
 Sometimes you may find yourself with a folder that is impossible to display while the others are.
 By disabling SSL, one may possibly (but not always) see the following error:
