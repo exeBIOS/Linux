@@ -396,6 +396,10 @@ Correction:
 sed 's,\r,,;s, *$,,' /etc/vsftpd/vsftpd_user_conf/judith | sudo tee /etc/vsftpd/vsftpd_user_conf/judith_new
 ```
 > [source](https://serverfault.com/questions/442500/500-oops-bad-bool-value-in-config-file-for-anonymous-enable)
+Puis faite cette command:
+```
+sudo chown ftp:ftp /srv/ftp/allusers/externe
+```
 ## Log
 The log file is ```/var/log/vsftpd.log```
 The ```journalctl``` command also displays relevant information.
