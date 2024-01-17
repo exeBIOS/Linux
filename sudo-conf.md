@@ -24,7 +24,9 @@ Find the following line in the document:
 
 Under ```%sudo   ALL=(ALL:ALL) ALL``` type the following line:
 
+```
 "user" ALL=(ALL) NOPASSWD:ALL
+```
 
 >[!important]
 >Replace **"user"** bye your the Linux user you want to give sudo acces.
