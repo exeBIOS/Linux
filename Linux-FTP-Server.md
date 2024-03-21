@@ -337,7 +337,7 @@ The connection should be made and display the contents of the directory.
 Try to create a directory from Filezilla. 
 What is going on ? How can I enable the creation of a directory?
 
-> [!warning]
+> [!caution]
 > It is forbidden to use chmod 777...
 > There are other possibilities for this, including the use of the ftp group.
 > We must therefore find a way to make the /srv/ftp/allusers directory writable by FTP server users with these constraints.
