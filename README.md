@@ -1,8 +1,10 @@
 # Linux
-## Description
+
 > [!note]
 > In this repository you will find multiple Linux procedures to install and configure a service.
-## Procedures
+
+## Debian GNU/Linux
+
 「📁」[FTP-Server](Linux-FTP-Server.md)
 
 「🔗」[SSH](SSH-[🇬🇧-🇫🇷].md)
@@ -13,4 +15,4 @@
 
 「📜」[DNS-BIND](DNS-BIND-[🇬🇧-🇫🇷].md)
 
-「?」[Sudo-Conf](sudo-conf.md)
+「👑」[Sudo-Conf](sudo-conf.md)
