@@ -1,7 +1,7 @@
 # Linux
 
 > [!note]
-> In this repository you will find multiple Linux procedures to install and configure a service.
+> In this repository you will find multiple Linux procedures to install and configure different services and useful configurations procedures.
 
 ## 🐘 Debian GNU/Linux
 
