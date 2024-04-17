@@ -3,7 +3,7 @@
 > [!note]
 > In this repository you will find multiple Linux procedures to install and configure a service.
 
-## Debian GNU/Linux
+## 🐘 Debian GNU/Linux
 
 「📁」[FTP-Server](Linux-FTP-Server.md)
 
