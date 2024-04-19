@@ -51,7 +51,7 @@ Organizational Unit Name (eg, section) []:<NAME OF TRAINING>
 Common Name (e.g. server FQDN or YOUR name) []:example.com
 Email Address []:<admin@example.com>
 ```
-> [!note]
+> [!tip]
 > ### Text editors
 > Some information on text editors.
 > The file to be edited is dense, here are some tips for modifying it and especially searching for information inside.
