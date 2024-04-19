@@ -3,16 +3,18 @@
 > [!note]
 > In this repository you will find multiple Linux procedures to install and configure different services and useful configurations procedures.
 
-## 🐘 Debian GNU/Linux
+## Documentation
 
-「📁」[FTP-Server](Linux-FTP-Server.md)
+### 🐘 Debian GNU/Linux
 
-「🔗」[SSH](SSH-[🇬🇧-🇫🇷].md)
+「📁」[FTP-Server](Linux-FTP-Server.md) *Configure an FTP server*
 
-「🔍」[DHCP](DHCP-[🇬🇧-🇫🇷].md)
+「🔗」[SSH](SSH-[🇬🇧-🇫🇷].md) *Configure SSH on your Linux machine*
 
-「🚗」[Router](Router-[🇬🇧-🇫🇷].md)
+「🔍」[DHCP](DHCP-[🇬🇧-🇫🇷].md) *Configure a DHCP server*
 
-「📜」[DNS-BIND](DNS-BIND-[🇬🇧-🇫🇷].md)
+「🚗」[Router](Router-[🇬🇧-🇫🇷].md) *Configure a Linux based Router* 
 
-「👑」[Sudo-Conf](sudo-conf.md)
+「📜」[DNS-BIND](DNS-BIND-[🇬🇧-🇫🇷].md) *Configure DNS BIND*
+
+「👑」[Sudo-Conf](sudo-conf.md) *Configure SUDO*
