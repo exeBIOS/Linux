@@ -62,8 +62,8 @@ Email Address []:<admin@example.com>
 >     - **`ctrl` + `_`** or **`Alt` + `G`**: go to line no…
 >     - **`ctrl` + `K`**: **cut**: cuts the current line.
 >     - **`ctrl` + `U`**: **Uncut**: pastes the previously cut line.
-> 2) Another editor is ne (Nice Editor) and offers more “standard” shortcuts (**ctrl-C**, **ctrl-V**) and access to a menu bar using the **Esc** key.
-> It is installable via **apt-get**.
+> 2) Another editor is NE (*Nice Editor*) and offers more “standard” shortcuts (`ctrl` + `C`, `ctrl` + `V`) and access to a menu bar using the `Esc` key.
+> It is installable via `apt-get`.
 ## Configuring VSFTP
 The ```/etc/vsftpd.conf``` file allows you to modify various elements.
 Change the following options (*check with the search functions if they are already present using* ```ctrl + w```):
