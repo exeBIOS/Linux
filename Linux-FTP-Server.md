@@ -56,12 +56,12 @@ Email Address []:<admin@example.com>
 > Some information on text editors.
 > The file to be edited is dense, here are some tips for modifying it and especially searching for information inside.
 > 1) You can edit it with **nano** and modify the elements indicated below. To navigate **nano**, use the following shortcuts:
->     - **ctrl-W**: searches for a character string (**alt-W** repeats the search).
->     - **ctrl-G**: displays help.
->     - **ctrl-C** or **F11**: displays the current cursor position (useful for knowing the line number).
->     - **ctrl-_** or **Alt-G**: go to line no…
->     - **ctrl-K**: **cut**: cuts the current line.
->     - **ctrl-U**: **Uncut**: pastes the previously cut line.
+>     - **`ctrl` + `W`**: searches for a character string (**alt-W** repeats the search).
+>     - **`ctrl` + `G`**: displays help.
+>     - **`ctrl` + `C`** or `F11`: displays the current cursor position (useful for knowing the line number).
+>     - **`ctrl` + `_`** or **`Alt` + `G`**: go to line no…
+>     - **`ctrl` + `K`**: **cut**: cuts the current line.
+>     - **`ctrl` + `U`**: **Uncut**: pastes the previously cut line.
 > 2) Another editor is ne (Nice Editor) and offers more “standard” shortcuts (**ctrl-C**, **ctrl-V**) and access to a menu bar using the **Esc** key.
 > It is installable via **apt-get**.
 ## Configuring VSFTP
