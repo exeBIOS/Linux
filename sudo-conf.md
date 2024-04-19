@@ -29,4 +29,4 @@ Under ```%sudo   ALL=(ALL:ALL) ALL``` type the following line:
 ```
 
 >[!important]
->Replace **"user"** bye your the Linux user you want to give sudo acces.
+>Replace **"user"** with the Linux user you want to give sudo access to.
