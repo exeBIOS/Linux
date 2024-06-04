@@ -482,7 +482,7 @@ listen_port=21
 The port range (here 3000 to 3099) must be open in the firewall.
 ## Unable to create a folder
 ## Allow local edits for *login.db* users
-In vsftpd.conf, add:
+In `vsftpd.conf`, add:
 ```
 write_enable=YES
 local_umask=022
