@@ -1,6 +1,6 @@
 # DNS Configuration with BIND [🇬🇧]
 
-## Installation of BIND
+## BIND Installation
 ```
 sudo apt-get install bind9 bind9utils bind9-doc
 ```
