@@ -6,7 +6,7 @@ sudo apt-get install bind9 bind9utils bind9-doc
 ```
 BIND is a DNS server that resolves domain names to IP addresses.
 
-### Definition of DNS Zone
+### DNS Zone Definition
 Configure DNS zones for domain name resolution and reverse DNS.
 Edit: ```/etc/bind/named.conf.local```
 Add:
@@ -21,7 +21,7 @@ zone "153.168.192.in-addr.arpa" {
     file "/etc/bind/db.153.168.192.in-addr.arpa";
 };
 ```
-## Configuration of Zone Files
+## Zone Files Configuration
 Edit: ```/etc/bind/db.example.com```
 Configure:
 ```
@@ -65,7 +65,7 @@ $TTL 1800
 ;152     IN      PTR     pop3.example.com.
 ;152     IN      PTR     mail.example.com.
 ```
-## Modification of BIND Options:
+## BIND Options Modification:
 Edit: ```/etc/bind/named.conf.options```
 Configure:
 ```
