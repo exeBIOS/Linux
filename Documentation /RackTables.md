@@ -92,3 +92,47 @@ sudo setenforce 1
 sudo chown -R apache:apache /var/www/html/racktables-web
 sudo chmod -R 755 /var/www/html/racktables-web
 ```
+### Start MariaDB
+```
+sudo systemctl start mariadb
+```
+### Connect to MySQL:
+```
+mysql -u root -p
+```
+
+### Create the database:
+>[!caution]
+> Don't Forget to change the user **Name** and **Password** in the MySQL code !!
+>You might also get this error: *ERROR 1396 (HY000): Operation CREATE USER failed for 'user'@'localhost'*.
+>Tghis is because the user you are entering already exists in Maria DB.
+```
+CREATE DATABASE racktables_db CHARACTER SET utf8 COLLATE utf8_general_ci;
+CREATE USER 'racktables_user'@'localhost' IDENTIFIED BY 'tonmotdepasse';
+GRANT ALL PRIVILEGES ON racktables_db.* TO 'racktables_user'@'localhost';
+FLUSH PRIVILEGES;
+EXIT;
+```
+### Enter the following values:
+| Champ    | Valeur          |
+| -------- | --------------- |
+| database | `racktables_db` |
+| username | `dasmin`        |
+| password | `Azerty.123`    |
+
+Click on **retry**.
+
+### Change the permissions to continue
+Give the properties to the Apache User
+```
+sudo chown apache:apache /var/www/html/racktables-web/inc/secret.php
+```
+Configure the correct permissions *Read Only*.
+```
+sudo chmod 400 /var/www/html/racktables-web/inc/secret.php
+```
+Verify the rights:
+```
+ls -l /var/www/html/racktables-web/inc/secret.php
+```
+
