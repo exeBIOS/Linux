@@ -48,3 +48,47 @@ sudo firewall-cmd --reload
 ```
 http://192.168.1.56/racktables
 ```
+## Get access to the web configuration interface
+```
+sudo mv /var/www/html/racktables/wwwroot /var/www/html/racktables-web
+```
+### Give permissions
+```
+sudo chown -R apache:apache /var/www/html/racktables-web
+sudo chmod -R 755 /var/www/html/racktables-web
+```
+### Install php-bcmath packages
+```
+sudo dnf install php-bcmath
+```
+### Create the secret.php file :
+
+```
+sudo touch /var/www/html/racktables-web/inc/secret.php
+```
+### Give permissions
+
+```
+sudo chmod 666 /var/www/html/racktables-web/inc/secret.php
+```
+### Change Apache's User account name
+
+```
+sudo chown apache:apache /var/www/html/racktables-web/inc/secret.php
+```
+(Temporarly) deactivate SELinux to continue the installation :
+
+```
+sudo setenforce 0
+```
+You can reactivate SElinux with this command :
+
+```
+sudo setenforce 1
+```
+✅ Make the file accessible to apache
+
+```
+sudo chown -R apache:apache /var/www/html/racktables-web
+sudo chmod -R 755 /var/www/html/racktables-web
+```
