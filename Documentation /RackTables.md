@@ -26,7 +26,7 @@ sudo mysql_secure_installation
 sudo mysql -u root -p
 ```
 
-Inside MySQL type the followinf commands:
+Inside MySQL type the following commands:
 >[!caution]
 > Don't Forget to change the user **Name** and **Password** in the MySQL code !!
 ```
